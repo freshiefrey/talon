@@ -20,11 +20,11 @@ def features(sender=''):
     return [
         # This one isn't from paper.
         # Meant to match companies names, sender's names, address.
-        many_capitalized_words,
+        many_capitalized_words, ### OWN FEATURE
         # This one is not from paper.
         # Line is too long.
         # This one is less aggressive than `Line is too short`
-        lambda line: 1 if len(line) > TOO_LONG_SIGNATURE_LINE else 0,
+        lambda line: 1 if len(line) > TOO_LONG_SIGNATURE_LINE else 0, ### OWN FEATURE
         # Line contains email pattern.
         binary_regex_search(RE_EMAIL),
         # Line contains url.
@@ -43,7 +43,13 @@ def features(sender=''):
         lambda line: 1 if punctuation_percent(line) > 50 else 0,
         # Percentage of punctuation symbols in the line is larger than 90%
         lambda line: 1 if punctuation_percent(line) > 90 else 0,
-        contains_sender_names(sender)
+        contains_sender_names(sender) # contains sender name and/or surname
+
+        ## 11) ends with quote symbol
+        ## 12) Number of leading tabs in line =1
+        ## 13) number of leading tabs  = 2
+        ## 14) nunber of leading tabs >=3
+        ## 15) % of punctuation symbols in line > 20%
         ]
 
 
